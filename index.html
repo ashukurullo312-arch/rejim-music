@@ -1,41 +1,144 @@
+
 <!DOCTYPE html>
 <html lang="tg">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>REJIM MUSIC</title>
+
 <style>
+* {
+  box-sizing: border-box;
+}
+
 body {
-  background: #090909;
+  margin: 0;
+  padding: 20px;
+  background: #080808;
   color: white;
-  font-family: Arial;
+  font-family: Arial, sans-serif;
   text-align: center;
-  padding: 30px;
 }
-h1 {color: #00e5ff;}
+
+header {
+  padding: 30px 10px;
+}
+
+h1 {
+  color: #00e5ff;
+  font-size: 35px;
+  text-shadow: 0 0 15px #00e5ff;
+}
+
+header p {
+  color: #aaa;
+}
+
 .box {
-  background: #191919;
+  background: #171717;
   padding: 25px;
-  border-radius: 15px;
-  margin-top: 30px;
+  border-radius: 20px;
+  margin: 25px auto;
+  max-width: 450px;
+  border: 1px solid #333;
 }
+
+.music-icon {
+  font-size: 65px;
+  margin: 15px;
+}
+
+h2 {
+  color: #00e5ff;
+}
+
 button {
   background: #00e5ff;
+  color: black;
   border: none;
-  padding: 12px 25px;
-  border-radius: 20px;
+  padding: 14px 25px;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 10px;
+}
+
+button:hover {
+  background: white;
+}
+
+audio {
+  width: 100%;
+  margin-top: 20px;
+}
+
+#status {
+  color: #00e5ff;
+  font-size: 14px;
+}
+
+footer {
+  color: #777;
+  margin-top: 50px;
 }
 </style>
 </head>
+
 <body>
-<h1>🎵 REJIM MUSIC</h1>
-<p>Хуш омадед ба ҷаҳони мусиқӣ!</p>
+
+<header>
+  <h1>🎵 REJIM MUSIC</h1>
+  <p>Хуш омадед ба ҷаҳони мусиқӣ!</p>
+</header>
+
 <div class="box">
-<h2>Мусиқии дӯстдоштаи шумо</h2>
-<p>REJIM MUSIC BOT</p>
-<button onclick="alert('Ба REJIM MUSIC хуш омадед!')">
-Оғоз
-</button>
+  <div class="music-icon">🎧</div>
+
+  <h2>Мусиқии дӯстдоштаи шумо</h2>
+
+  <p>Бо REJIM MUSIC мусиқии дӯстдоштаатонро гӯш кунед.</p>
+
+  <input type="file" id="musicFile"
+  accept="audio/*" hidden>
+
+  <button onclick="document.getElementById('musicFile').click()">
+    🎵 Интихоби мусиқӣ
+  </button>
+
+  <p id="status">Мусиқиро интихоб кунед</p>
+
+  <audio id="player" controls></audio>
 </div>
+
+<div class="box">
+  <h2>🤖 REJIM MUSIC BOT</h2>
+  <p>Боти мусиқии мо</p>
+  <button onclick="alert('Ба REJIM MUSIC хуш омадед!')">
+    Оғоз
+  </button>
+</div>
+
+<footer>
+  © 2026 REJIM MUSIC
+  <p>Ҳамаи ҳуқуқҳо ҳифз шудаанд.</p>
+</footer>
+
+<script>
+const fileInput = document.getElementById("musicFile");
+const player = document.getElementById("player");
+const status = document.getElementById("status");
+
+fileInput.addEventListener("change", function() {
+  const file = this.files[0];
+
+  if (file) {
+    player.src = URL.createObjectURL(file);
+    status.textContent = "Мусиқӣ: " + file.name;
+    player.play();
+  }
+});
+</script>
+
 </body>
 </html>
